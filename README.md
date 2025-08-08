@@ -11,6 +11,9 @@ feel free to copy the JSON workflow and add your own API credentials.
 
 ![image](images/image-vectorization.png)
 
+See it in action here: https://drive.google.com/file/d/1CS0g856ZWGD2MeZp8XA3M0F3zE0zNL9v/view?usp=sharing
+
+
 Tools used
 
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://www.google.com/drive/)

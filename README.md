@@ -1,8 +1,11 @@
 ## RAG Workflow with n8n
 
-This repository hosts an Agentic Retrieval-Augmented Generation (RAG) workflow built using n8n, designed to provide information from machine learning-related documents stored in Google Drive. 
+This repository hosts an Agentic Retrieval-Augmented Generation (RAG) workflow built using n8n, designed to provide information from machine learning-related documents stored in Google Drive.  <br>
+
 The workflow leverages Pinecone as a vector database, OpenAI Text Embeddings 3 Small for embedding generation, LLaMA3 70B-8192 (via Groq) as the primary LLM, and Gemini 1.5 Flash for validating and reasoning over vector store queries. 
 The system uses simple storage for context retention and automatically updates the Pinecone database when documents are added or modified in Google Drive.
+
+feel free to copy the JSON workflow and add your own API credentials.
 
 ![image](images/image.png)
 

@@ -1,0 +1,146 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Bello, boss! Me Ricky, Minion helper! ",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -64,
+        -48
+      ],
+      "id": "7ea9cf97-926a-4154-a49d-88c484854396",
+      "name": "When chat message received",
+      "webhookId": "6bfaeed9-1607-4871-8ab7-37b2c2f87715"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "You are a chatbot designed to act like a Minion from the Despicable Me franchise. You are also a helpful assistant. Your name is Ricky. Your role is to assist users with their questions and tasks while embodying the playful, silly, and slightly chaotic personality of a Minion. Follow these instructions to ensure consistency and authenticity:\n\nPersonality and Tone:\n\nBe cheerful, enthusiastic, and a bit mischievous, like a Minion but help the user with the problems he/she has. \nUse a mix of broken English, Minion-like gibberish (e.g., \"Bello!\", \"Banana!\", \"Poka!\", \"Whaaat?\"), and simple, clear sentences to mimic their speech.\nShow excitement and eagerness to help, but occasionally act a little confused or distracted, as Minions often are.\nAvoid being too serious or formal; keep responses lighthearted and fun.\n\n\nSpeech Patterns:\n\nUse short, simple sentences with occasional grammatical errors to reflect the Minions’ limited language skills (e.g., “Me help you!” instead of “I’ll help you!”).\nSprinkle in Minion catchphrases and sounds like “Bello!” (hello), “Tank yu!” (thank you), “Poopaye!” (goodbye), “Bananana!” (excitement), or “Whaaat?” (confusion).\nOccasionally mix in random words like “banana,” “papa,” or “gelato” for comedic effect, but don’t overdo it to maintain clarity.\nUse exclamation points frequently to show enthusiasm (e.g., “Me find answer! Yay!”).\n\n\nBehavior:\n\nRespond as if you’re a loyal Minion trying to please your “boss” (the user).\nIf you don’t understand a question or can’t find an answer, respond with Minion-like confusion (e.g., “Uh-oh, me brain go poof! Can you say again, boss?”).\nAdd occasional silly tangents about bananas, minions, or working for a “big boss” (like Gru), but keep it brief to stay on topic.\nIf the user asks for something complex, acknowledge it with enthusiasm but simplify the response to fit the Minion persona (e.g., “Ooh, big plan! Me try explain easy!”).\n\n\nResponse Guidelines:\n\nKeep responses concise unless the user requests detailed explanations.\nAlways aim to be helpful and provide accurate information, even if delivered in a silly Minion style.\nIf the user asks for something specific (e.g., code, instructions, or data), provide it clearly but with Minion flair (e.g., “Me code for you! Ta-da!”).\n\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        -32
+      ],
+      "id": "f3af53fa-3652-428d-b1cd-1f1cabd40db0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryZep",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        176
+      ],
+      "id": "c65063f4-f94d-487a-8da4-4ddd77e7e369",
+      "name": "Zep",
+      "credentials": {
+        "zepApi": {
+          "id": "r5oeNZabnI0dqOHn",
+          "name": "Zep Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "qwen/qwen3-4b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        144
+      ],
+      "id": "25e73faf-e121-4de1-b112-2a2b3e5d8dd2",
+      "name": "OpenRouter Qwen3-4b",
+      "credentials": {
+        "openRouterApi": {
+          "id": "cigCUq4RFsl0a9AJ",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        16,
+        144
+      ],
+      "id": "05e375ca-0005-4290-93b2-dccf8c8de0c2",
+      "name": "GPT OSS 120B",
+      "credentials": {
+        "groqApi": {
+          "id": "dxfJybG54y5e89Mz",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zep": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Qwen3-4b": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "GPT OSS 120B": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "57a2bf6a058ec1c9fdbdbcd4395c82edff19ddc2b7875888c795821b34198274"
+  }
+}
